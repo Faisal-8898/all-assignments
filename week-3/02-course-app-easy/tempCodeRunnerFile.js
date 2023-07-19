@@ -1,31 +1,24 @@
 const express = require('express');
 const app = express();
-const jwt = require("jsonwebtoken");
 
 app.use(express.json());
 
 let ADMINS = [];
 let USERS = [];
 let COURSES = [];
-let countId = 0;
 
 // Admin routes
 app.post('/admin/signup', (req, res) => {
   // logic to sign up admin
-  const { username, password } = req.body;
-  // check already existing admin or not
+  const { username , password }= req.body;
+  // check already existing admin or not 
   const existingAdmin = ADMINS.find((admin) => admin.username === username);
 
-  if (existingAdmin) {
+  if(existingAdmin){
     return res.status(400).json({ error: "Usernmae already exits" });
-  } else {
-    const newAdmin = {
-      username,
-      password,
-    };
-    ADMINS.push(newAdmin);
-
-    return res.status(200).json({ message: "Admin created successfully " });
+  }
+  else{
+    return res.status(200).json({ message: 'Admin created successfully '});
   }
 });
 
