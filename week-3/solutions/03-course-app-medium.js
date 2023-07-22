@@ -33,7 +33,7 @@ const authenticateJwt = (req, res, next) => {
       }
       req.user = user;
       next();
-    });
+    }); 
   } else {
     res.sendStatus(401);
   }
