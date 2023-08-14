@@ -5,26 +5,14 @@
 </head>
 <script>
 
-    function deleteDone() {
-        console.log("done delete");
-        // Delete the right todo from the list
-        // You will need to give each todo an id, and that should be enough to remove it
 
-    }
-    function deleteTodo(id) {
-        fetch("http://localhost:3000/todos/" + id, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(deleteDone)
-    }
 
     function todosCallback(data) {
         var parentElement = document.getElementById("mainArea");
         // parentElement.innerHTML = JSON.stringify(data);
-        for (var i = 0; i<data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             var childElement = document.createElement("div");
+            childElement.id = "item-" + data[i].id;
 
             var grandChildElement1 = document.createElement("span");
             grandChildElement1.innerHTML = data[i].title
@@ -44,8 +32,8 @@
         }
     }
 
-    function getDataCallback(resp) {
-        resp.json().then(todosCallback);
+    function getDataCallback(res) {
+        res.json().then(todosCallback);
     }
 
     function getData() {
@@ -54,7 +42,7 @@
         }).then(getDataCallback)
     }
 
-    getData();
+
 
     function parsedResponse(data) {
         console.log(data);
@@ -82,7 +70,7 @@
     }
 
     function onPress() {
-        var title = document.getElementById("title1").value;
+        var title = document.getElementById("title").value;
         var description = document.getElementById("description").value;
 
         fetch("http://localhost:3000/todos", {
@@ -96,10 +84,41 @@
             }
         }).then(callback)
     }
+
+
+    function deleteDone(data) {
+        
+    console.log("done delete");
+    var parentElement = document.getElementById('mainArea');
+    var selectedChildElement = document.querySelector("#item-" + data);
+
+    if (selectedChildElement) {
+        selectedChildElement.remove();
+    }
+}
+
+function deleteTodo(id) {
+    fetch("http://localhost:3000/todos/" + id, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(response => {
+        if (response.ok) {
+            deleteDone(id);
+        } else {
+            console.log("Error deleting todo");
+        }
+    });
+}
+
+getData();
+
 </script>
+
 <body>
     Todo title
-    <input type="text" id="title1"></input>
+    <input type="text" id="title"></input>
     <br><br>
     Todo description
     <input type="text" id="description"></input>

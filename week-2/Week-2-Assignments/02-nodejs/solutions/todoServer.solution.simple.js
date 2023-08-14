@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require("cors");
 
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors());
 
 let todos = [];
 
@@ -45,24 +47,25 @@ app.post('/todos', (req, res) => {
   res.status(201).json(newTodo);
 });
 
-app.put('/todos/:id', (req, res) => {
-  const todoIndex = findIndex(todos, parseInt(req.params.id));
-  if (todoIndex === -1) {
-    res.status(404).send();
-  } else {
-    todos[todoIndex].title = req.body.title;
-    todos[todoIndex].description = req.body.description;
-    res.json(todos[todoIndex]);
-  }
-});
+// app.put('/todos/:id', (req, res) => {
+//   const todoIndex = findIndex(todos, parseInt(req.params.id));
+//   if (todoIndex === -1) {
+//     res.status(404).send();
+//   } else {
+//     todos[todoIndex].title = req.body.title;
+//     todos[todoIndex].description = req.body.description;
+//     res.json(todos[todoIndex]);
+//   }
+// });
 
 app.delete('/todos/:id', (req, res) => {
-  const todoIndex = findIndex(todos, parseInt(req.params.id));
+  const id = req.params.id;
+  const todoIndex = findIndex(todos, parseInt(id));
   if (todoIndex === -1) {
     res.status(404).send();
   } else {
     todos = removeAtIndex(todos, todoIndex);
-    res.status(200).send();
+    res.status(200).send(id);
   }
 });
 
@@ -71,4 +74,4 @@ app.use((req, res, next) => {
   res.status(404).send();
 });
 
-module.exports = app;
+app.listen(3000);
