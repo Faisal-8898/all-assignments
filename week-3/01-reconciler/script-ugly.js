@@ -1,5 +1,11 @@
 function createDomElements(data) {
-    var parentElement = document.getElementById("mainArea");
+    const parentElement = document.getElementById("mainArea");
+
+    const currentChild = Array.from(parentElement.children);
+
+    data.forEach(item => {
+      const existingChild = currentChild.find( child => data.id==item.id);
+    });
   
     // Clear all existing children of the parentElement
     parentElement.innerHTML = '';
@@ -42,5 +48,5 @@ function createDomElements(data) {
     }
   
     createDomElements(todos)
-  }, 5000)
+  }, 1000)
   
