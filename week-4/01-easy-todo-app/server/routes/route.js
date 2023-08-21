@@ -7,6 +7,6 @@ const route = express.Router();
 
 route.post('/todos',addNewTodo);
 route.get('/todos', getAllTodo);
-route.delete('/todos', deleteTodo);
+route.delete('/todos', deleteTodo );
 
 export default route;
