@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Login from './components/Login';
 import Landing from "./components/Landing";
 import CreateCourse from './components/CreateCourse';
@@ -10,17 +10,16 @@ import ShowCourses from './components/ShowCourses';
 // based on the route.
 // You can also try going to /random and see what happens (a route that doesnt exist)
 function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Landing />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/about" element={<CreateCourse />} />
-                <Route path="/courses" element={<ShowCourses />} />
-            </Routes>
-        </Router>
-    );
+    return (<Router>
+        <Routes>
+            <Route path="/" element={<Landing/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/register" element={<Register/>}/>
+            <Route path="/about" element={<CreateCourse/>}/>
+            <Route path="/courses" element={<ShowCourses/>}/>
+        </Routes>
+    </Router>);
 }
+
 
 export default App;
