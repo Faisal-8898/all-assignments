@@ -29,9 +29,38 @@
   Testing the server - run `npm run test-authenticationServer` command in terminal
  */
 
-const express = require("express")
+const express = require("express");
 const PORT = 3000;
 const app = express();
+const bodyParser = require('body-parser');
 // write your logic here, DONT WRITE app.listen(3000) when you're running tests, the tests will automatically start the server
+//crud => create(post) , read(get) , update(put) , delete(del)
+app.use(bodyParser.json()); // middleware
+app.use(express.json());
+
+const users = [];
+
+app.post("/Signup",(req,res)=>{
+  try {
+    const usernamee = req.headers;
+
+    const { username, password } = req.body;
+     const newUser = req.body;
+     console.log(newUser);
+     console.log(usernamee);
+     res.status(201).send("Signup successful");
+    
+     
+  } catch (error) {
+    res.status(404).json({message: "data not found"});
+    console.log(error);
+  }
+})
+
+
+
+app.listen(3000, () => {
+  console.log("server has connected ");
+});
 
 module.exports = app;
