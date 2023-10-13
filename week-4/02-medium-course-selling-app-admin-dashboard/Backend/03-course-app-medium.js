@@ -1,6 +1,7 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const fs = require('fs');
+import express from 'express';
+import cors from 'cors';
+import jwt from "jsonwebtoken";
+import fs from "fs";
 const app = express();
 
 app.use(express.json());
@@ -33,7 +34,7 @@ const authenticateJwt = (req, res, next) => {
       }
       req.user = user;
       next();
-    }); 
+    });
   } else {
     res.sendStatus(401);
   }
@@ -134,6 +135,7 @@ app.post('/users/courses/:courseId', authenticateJwt, (req, res) => {
       res.status(403).json({ message: 'User not found' });
     }
   } else {
+
     res.status(404).json({ message: 'Course not found' });
   }
 });
