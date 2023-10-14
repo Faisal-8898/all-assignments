@@ -3,7 +3,7 @@ import { Card, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-function Signup() {
+function Signin() {
   return (
     <>
       <center>
@@ -13,9 +13,7 @@ function Signup() {
             paddingBottom: 8,
           }}
         >
-          <Typography variant="h7">
-            Welcome to the course of AI by Faisal
-          </Typography>
+          <Typography variant="h7">Welcome back! Sign in below </Typography>
         </div>
       </center>
       <Card
@@ -44,10 +42,10 @@ function Signup() {
           variant="outlined"
         />
         <br /> <br />
-        <Button variant="contained">Signup</Button>
+        <Button variant="contained">login</Button>
       </Card>
     </>
   );
 }
 
-export default Signup;
+export default Signin;
